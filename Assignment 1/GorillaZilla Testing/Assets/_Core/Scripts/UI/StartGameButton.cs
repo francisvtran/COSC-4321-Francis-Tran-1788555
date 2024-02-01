@@ -10,9 +10,18 @@ public class StartGameButton : MonoBehaviour
 {
     void Start()
     {
-        GetComponent<Button>().onClick.AddListener(OnButtonClick);
+        // Start the coroutine to delay the game start
+        StartCoroutine(StartGameAfterDelay());
     }
 
+    private IEnumerator StartGameAfterDelay()
+    {
+        // Wait for the specified delay
+        yield return new WaitForSeconds(5);
+
+        // Now that the delay is over, start the game
+        OnButtonClick();
+    }
     private void OnButtonClick()
     {
         GameObject.FindObjectOfType<GameManager>().StartGame();
